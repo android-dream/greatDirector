@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RadioGroup
+        android:id="@+id/radioGroupTab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/background_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
+
+        <RadioButton
+            android:id="@+id/radioIndex"
+            style="@style/radioStyle"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_tab_index"
+            android:text="@string/index" />
+
+        <RadioButton
+            android:id="@+id/radioStar"
+            style="@style/radioStyle"
+            android:drawableTop="@drawable/selector_tab_star"
+            android:text="社区" />
+
+        <RadioButton
+            android:id="@+id/radioFavorite"
+            style="@style/radioStyle"
+            android:drawableTop="@drawable/selector_tab_favorite"
+            android:text="关注" />
+
+        <RadioButton
+            android:id="@+id/radioMy"
+            style="@style/radioStyle"
+            android:drawableTop="@drawable/selector_tab_my"
+            android:text="我的" />
+    </RadioGroup>
+</merge>

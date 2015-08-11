@@ -7,19 +7,18 @@
         android:id="@+id/slide_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <include layout="@layout/layout_menu" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/background_color"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <include layout="@layout/layout_title_bar" />
 
             <LinearLayout
-                android:id="@+id/time_tobonus"
+                android:id="@+id/timeTobonus"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
@@ -41,9 +40,11 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"></FrameLayout>
 
+            <include layout="@layout/layout_main_tab"/>
+<!--
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="48dp"
                 android:background="#1F1F1F"
                 android:orientation="horizontal">
 
@@ -185,6 +186,7 @@
                     </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>
+            -->
         </LinearLayout>
     </com.yanshili.greatdirector.utils.SlideMenu>
 </LinearLayout>

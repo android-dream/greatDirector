@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title_bar_layout"
     android:layout_width="fill_parent"
-    android:layout_height="30dip"
+    android:layout_height="wrap_content"
     android:background="@color/background_color"
     android:gravity="center_vertical"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="10dp"
-    android:id="@+id/title_bar_layout">
+    android:minHeight="?actionBarSize">
 
     <ImageView
         android:id="@+id/title_bar_menu_btn"
@@ -15,28 +16,29 @@
         android:layout_centerVertical="true"
         android:gravity="center"
         android:src="@mipmap/ic_top_bar_category" />
+
     <TextView
-        android:gravity="center"
         android:id="@+id/title_bar_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_color"
-        android:textSize="18dp"
         android:layout_weight="1"
-        />
+        android:gravity="center"
+        android:textColor="@color/text_color"
+        android:textSize="18dp" />
+
     <RelativeLayout
-        android:id="@+id/search_layout"
+        android:id="@+id/searchLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#1F1F1F"
-        >
+        android:padding="8dp">
+
         <ImageView
+
             android:id="@+id/search_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/sear_image"
-            />
+            android:src="@mipmap/sear_image" />
     </RelativeLayout>
-
 
 </LinearLayout>

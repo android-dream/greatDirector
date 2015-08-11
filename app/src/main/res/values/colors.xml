@@ -3,4 +3,6 @@
     <color name="background_color">#1F1F1F</color>
     <color name="text_color">#40E0D0</color>
     <color name="white">#FFFFFF</color>
+    <color name="bg_director_name">#88BD73FF</color>
+    <color name="color_director_name">#40E0D0</color>
 </resources>
