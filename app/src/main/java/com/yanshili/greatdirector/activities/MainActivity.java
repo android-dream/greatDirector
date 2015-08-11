@@ -6,11 +6,10 @@ import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,13 +22,16 @@ import com.yanshili.greatdirector.fragment.FragmentStar;
 import com.yanshili.greatdirector.utils.SlideMenu;
 import com.yashili.greatdirector.greatdirector.R;
 
-import org.w3c.dom.Text;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity extends FragmentActivity implements View.OnClickListener {
+
+public class MainActivity extends FragmentActivity {
+
     private FragmentIndex Fragmentindex;
     private FragmentStar Fragmentstar;
     private FragmentFavorite Fragmentfavorite;
@@ -37,35 +39,56 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private FragmentSearch Fragmentsearch;
     private FragmentShowBonus fragmentShowBonus;
 
-    private RelativeLayout index_layout;
-    private RelativeLayout star_layout;
-    private RelativeLayout favorite_layout;
-    private RelativeLayout my_layout;
-    private RelativeLayout search_layout;
-    private LinearLayout showBonusLayout;
+    //    private RelativeLayout index_layout;
+//    private RelativeLayout star_layout;
+//    private RelativeLayout favorite_layout;
+//    private RelativeLayout my_layout;
+    @Bind(R.id.searchLayout)
+    RelativeLayout searchLayout;
 
-    private ImageView index_image;
-    private ImageView star_image;
-    private ImageView favorite_image;
-    private ImageView my_image;
-    private ImageView search_image;
+    @Bind(R.id.timeTobonus)
+    LinearLayout timeTobonus;
 
-    private TextView textViewIndex;
-    private TextView textViewStar;
-    private TextView textViewFavorite;
-    private TextView textViewMy;
+    //    private ImageView index_image;
+//    private ImageView star_image;
+//    private ImageView favorite_image;
+//    private ImageView my_image;
+//    private TextView textViewIndex;
+//    private TextView textViewStar;
+//    private TextView textViewFavorite;
+//    private TextView textViewMy;
+
+    @Bind(R.id.search_image)
+    ImageView search_image;
+    @Bind(R.id.radioIndex)
+    RadioButton radioIndex;
+    @Bind(R.id.radioStar)
+    RadioButton radioStar;
+    @Bind(R.id.radioFavorite)
+    RadioButton radioFavorite;
+    @Bind(R.id.radioMy)
+    RadioButton radioMy;
+    @Bind(R.id.title_bar_layout)
+    LinearLayout titleBarLayout;
+    @Bind(R.id.title_bar_text)
+    TextView titleBarText;
+    @Bind(R.id.slide_menu)
+    SlideMenu slideMenu;
+    @Bind(R.id.title_bar_menu_btn)
+    ImageView title_bar_menu_btn;
+
     FragmentManager fManager;
-    private SlideMenu slideMenu;
-
-    private TextView titleBarText;
-    private LinearLayout titleBarLayout;
+//    private SlideMenu slideMenu;
+//
+//    private TextView titleBarText;
+//    private LinearLayout titleBarLayout;
     private static int currentId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         fManager = getSupportFragmentManager();
         initViews();
         //默认选择首页
@@ -74,10 +97,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         final Handler mHandler = new Handler() {
 
             final int[] imgId = new int[]{R.mipmap.timetobonus, R.mipmap.touxiang3, R.mipmap.touxiang1};
+
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 0x123:
-                        showBonusLayout.setBackgroundResource(imgId[(currentId + 1) % imgId.length]);
+                        timeTobonus.setBackgroundResource(imgId[(currentId + 1) % imgId.length]);
                         currentId++;
                         break;
                     default:
@@ -99,57 +123,66 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     //初始化四个fragment布局
     public void initViews() {
         //侧边栏
-        titleBarLayout = (LinearLayout) findViewById(R.id.title_bar_layout);
-        titleBarText = (TextView) findViewById(R.id.title_bar_text);
-        slideMenu = (SlideMenu) findViewById(R.id.slide_menu);
-        ImageView menuImg = (ImageView) findViewById(R.id.title_bar_menu_btn);
-        menuImg.setOnClickListener(this);
+//        titleBarLayout = (LinearLayout) findViewById(R.id.title_bar_layout);
+//        titleBarText = (TextView) findViewById(R.id.title_bar_text);
+//        slideMenu = (SlideMenu) findViewById(R.id.slide_menu);
+//        ImageView menuImg = (ImageView) findViewById(R.id.title_bar_menu_btn);
+        //menuImg.setOnClickListener(this);
         //四个选择按钮的图标
-        index_image = (ImageView) findViewById(R.id.index_image);
-        star_image = (ImageView) findViewById(R.id.star_image);
-        favorite_image = (ImageView) findViewById(R.id.favorite_image);
-        my_image = (ImageView) findViewById(R.id.my_image);
-        search_image = (ImageView) findViewById(R.id.search_image);
+//        index_image = (ImageView) findViewById(R.id.index_image);
+//        star_image = (ImageView) findViewById(R.id.star_image);
+//        favorite_image = (ImageView) findViewById(R.id.favorite_image);
+//        my_image = (ImageView) findViewById(R.id.my_image);
+        //search_image = (ImageView) findViewById(R.id.search_image);
         //四个导航的文字
-        textViewIndex = (TextView) findViewById(R.id.textview_index);
-        textViewStar = (TextView) findViewById(R.id.textview_star);
-        textViewFavorite = (TextView) findViewById(R.id.textview_farorite);
-        textViewMy = (TextView) findViewById(R.id.textview_my);
+//        textViewIndex = (TextView) findViewById(R.id.textview_index);
+//        textViewStar = (TextView) findViewById(R.id.textview_star);
+//        textViewFavorite = (TextView) findViewById(R.id.textview_farorite);
+//        textViewMy = (TextView) findViewById(R.id.textview_my);
+
+
         //四个切换按钮的布局id
-        index_layout = (RelativeLayout) findViewById(R.id.index_layout);
-        star_layout = (RelativeLayout) findViewById(R.id.star_layout);
-        favorite_layout = (RelativeLayout) findViewById(R.id.favorite_layout);
-        my_layout = (RelativeLayout) findViewById(R.id.my_layout);
-        search_layout = (RelativeLayout) findViewById(R.id.search_layout);
-        showBonusLayout = (LinearLayout) findViewById(R.id.time_tobonus);
+//        index_layout = (RelativeLayout) findViewById(R.id.index_layout);
+//        star_layout = (RelativeLayout) findViewById(R.id.star_layout);
+//        favorite_layout = (RelativeLayout) findViewById(R.id.favorite_layout);
+//        my_layout = (RelativeLayout) findViewById(R.id.my_layout);
+//        searchLayout = (RelativeLayout) findViewById(R.id.searchLayout);
+//        timeTobonus = (LinearLayout) findViewById(R.id.timeTobonus);
         //设置布局侦听事件
-        index_layout.setOnClickListener(this);
-        star_layout.setOnClickListener(this);
-        favorite_layout.setOnClickListener(this);
-        my_layout.setOnClickListener(this);
-        search_layout.setOnClickListener(this);
-        showBonusLayout.setOnClickListener(this);
+//        index_layout.setOnClickListener(this);
+//        star_layout.setOnClickListener(this);
+//        favorite_layout.setOnClickListener(this);
+//        my_layout.setOnClickListener(this);
+
+//        radioIndex.setOnClickListener(this);
+//        radioStar.setOnClickListener(this);
+//        radioFavorite.setOnClickListener(this);
+//        radioMy.setOnClickListener(this);
+
+//        searchLayout.setOnClickListener(this);
+//        timeTobonus.setOnClickListener(this);
+
     }
 
-    @Override
-    public void onClick(View view) {
+    @OnClick({R.id.radioIndex, R.id.radioStar, R.id.radioFavorite, R.id.radioMy, R.id.searchLayout, R.id.timeTobonus,R.id.title_bar_menu_btn})
+    public void tabSelected(View view) {
         switch (view.getId()) {
-            case R.id.index_layout:
+            case R.id.radioIndex:
                 setChioceItem(0);
                 break;
-            case R.id.star_layout:
+            case R.id.radioStar:
                 setChioceItem(1);
                 break;
-            case R.id.favorite_layout:
+            case R.id.radioFavorite:
                 setChioceItem(2);
                 break;
-            case R.id.my_layout:
+            case R.id.radioMy:
                 setChioceItem(3);
                 break;
-            case R.id.search_layout:
+            case R.id.searchLayout:
                 setChioceItem(4);
                 break;
-            case R.id.time_tobonus:
+            case R.id.timeTobonus:
                 setChioceItem(5);
                 break;
             case R.id.title_bar_menu_btn:
@@ -161,10 +194,43 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             default:
                 break;
-
         }
-
     }
+
+//    @Override
+//    public void onClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.radioIndex:
+//                setChioceItem(0);
+//                break;
+//            case R.id.radioStar:
+//                setChioceItem(1);
+//                break;
+//            case R.id.radioFavorite:
+//                setChioceItem(2);
+//                break;
+//            case R.id.radioMy:
+//                setChioceItem(3);
+//                break;
+//            case R.id.searchLayout:
+//                setChioceItem(4);
+//                break;
+//            case R.id.timeTobonus:
+//                setChioceItem(5);
+//                break;
+//            case R.id.title_bar_menu_btn:
+//                if (slideMenu.isMainScreenShowing()) {
+//                    slideMenu.openMenu();
+//                } else {
+//                    slideMenu.closeMenu();
+//                }
+//                break;
+//            default:
+//                break;
+//
+//        }
+
+ //   }
 
     //主界面fragment布局选择
     public void setChioceItem(int index) {
@@ -172,16 +238,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //        transaction.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
         transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_out_top);
         transaction.addToBackStack(null);
-        clearChioce();
+        //clearChioce();
         hideFragments(transaction);
         switch (index) {
             case 0:
-                showBonusLayout.setVisibility(View.VISIBLE);
+                timeTobonus.setVisibility(View.VISIBLE);
                 titleBarLayout.setVisibility(View.VISIBLE);
                 titleBarText.setText("大导演");
-                textViewIndex.setTextColor(getResources().getColor(R.color.text_color));
-                index_image.setImageResource(R.mipmap.index_image_pressed);
+
+                //textViewIndex.setTextColor(getResources().getColor(R.color.text_color));
+//                index_image.setImageResource(R.mipmap.index_image_pressed);
                 //index_layout.setBackgroundResource(R.mipmap.bottom_feed_press);
+
                 if (Fragmentindex == null) {
                     Fragmentindex = new FragmentIndex();
                     Fragmentindex.setContext(this);
@@ -192,11 +260,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
 
             case 1:
-                textViewStar.setTextColor(getResources().getColor(R.color.text_color));
-                showBonusLayout.setVisibility(View.GONE);
-                titleBarLayout.setVisibility(View.VISIBLE);
+//                textViewStar.setTextColor(getResources().getColor(R.color.text_color));
+//                showBonusLayout.setVisibility(View.GONE);
+//                titleBarLayout.setVisibility(View.VISIBLE);
                 titleBarText.setText("明星社区");
-                star_image.setImageResource(R.mipmap.star_image_pressed);
+//                star_image.setImageResource(R.mipmap.star_image_pressed);
                 //star_layout.setBackgroundResource(R.mipmap.bottom_my_press);
                 if (Fragmentstar == null) {
                     Fragmentstar = new FragmentStar();
@@ -208,11 +276,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
 
             case 2:
-                textViewFavorite.setTextColor(getResources().getColor(R.color.text_color));
-                showBonusLayout.setVisibility(View.GONE);
+                //textViewFavorite.setTextColor(getResources().getColor(R.color.text_color));
+                timeTobonus.setVisibility(View.GONE);
                 titleBarLayout.setVisibility(View.VISIBLE);
                 titleBarText.setText("关注");
-                favorite_image.setImageResource(R.mipmap.favorite_image_pressed);
+                // favorite_image.setImageResource(R.mipmap.favorite_image_pressed);
                 // favorite_layout.setBackgroundResource(R.mipmap.bottom_hotrank_press);
                 if (Fragmentfavorite == null) {
                     Fragmentfavorite = new FragmentFavorite();
@@ -223,12 +291,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
 
             case 3:
-                textViewMy.setTextColor(getResources().getColor(R.color.text_color));
-                showBonusLayout.setVisibility(View.GONE);
+                //textViewMy.setTextColor(getResources().getColor(R.color.text_color));
+                timeTobonus.setVisibility(View.GONE);
                 titleBarLayout.setVisibility(View.VISIBLE);
                 titleBarText.setText("个人");
 
-                my_image.setImageResource(R.mipmap.my_image_pressed);
+                //my_image.setImageResource(R.mipmap.my_image_pressed);
                 // my_layout.setBackgroundResource(R.mipmap.bottom_my_press);
                 if (Fragmentmy == null) {
                     Fragmentmy = new FragmentMy();
@@ -239,7 +307,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
 
             case 4:
-                showBonusLayout.setVisibility(View.GONE);
+                timeTobonus.setVisibility(View.GONE);
                 titleBarLayout.setVisibility(View.GONE);
                 search_image.setImageResource(R.mipmap.sear_image);
                 // my_layout.setBackgroundResource(R.mipmap.bottom_my_press);
@@ -252,7 +320,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case 5:
                 titleBarLayout.setVisibility(View.VISIBLE);
-                showBonusLayout.setVisibility(View.GONE);
+                timeTobonus.setVisibility(View.GONE);
                 titleBarText.setText("大导演");
                 if (fragmentShowBonus == null) {
                     fragmentShowBonus = new FragmentShowBonus();
@@ -287,21 +355,21 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
 
-    public void clearChioce() {
-        index_image.setImageResource(R.mipmap.index_image);
-        textViewIndex.setTextColor(getResources().getColor(R.color.white));
-
-        star_image.setImageResource(R.mipmap.star_image);
-        textViewStar.setTextColor(getResources().getColor(R.color.white));
-
-        favorite_image.setImageResource(R.mipmap.favorite_image);
-        textViewFavorite.setTextColor(getResources().getColor(R.color.white));
-
-        my_image.setImageResource(R.mipmap.my_image);
-        textViewMy.setTextColor(getResources().getColor(R.color.white));
-
-        search_image.setImageResource(R.mipmap.sear_image);
-    }
+//    public void clearChioce() {
+//        index_image.setImageResource(R.mipmap.index_image);
+//        textViewIndex.setTextColor(getResources().getColor(R.color.white));
+//
+//        star_image.setImageResource(R.mipmap.star_image);
+//        textViewStar.setTextColor(getResources().getColor(R.color.white));
+//
+//        favorite_image.setImageResource(R.mipmap.favorite_image);
+//        textViewFavorite.setTextColor(getResources().getColor(R.color.white));
+//
+//        my_image.setImageResource(R.mipmap.my_image);
+//        textViewMy.setTextColor(getResources().getColor(R.color.white));
+//
+//        search_image.setImageResource(R.mipmap.sear_image);
+//    }
 
 
 }
